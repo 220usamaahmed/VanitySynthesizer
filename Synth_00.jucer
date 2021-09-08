@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="VB0TDo" name="Synth_00" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildStandalone,buildVST3"
-              pluginCharacteristicsValue="pluginIsSynth" pluginManufacturer="Colatz">
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              pluginManufacturer="Colatz" companyName="Colatz">
   <MAINGROUP id="MOyw8J" name="Synth_00">
     <GROUP id="{ABA2016A-1DA4-DF97-5783-D0517638D08C}" name="Source">
       <FILE id="xM287c" name="PluginProcessor.cpp" compile="1" resource="0"

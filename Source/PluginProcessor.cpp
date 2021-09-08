@@ -97,19 +97,14 @@ void Synth_00AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-
-    // juce::dsp::ProcessSpec spec;
-    // spec.maximumBlockSize = samplesPerBlock;
-    // spec.sampleRate = sampleRate;
-    // spec.numChannels = getTotalNumOutputChannels();
-
-    // osc.prepare(spec);
-    // gain.prepare(spec);
-
-    // osc.setFrequency(220.0f);
-    // gain.setGainLinear(0.01f);
-
     synth.setCurrentPlaybackSampleRate(sampleRate);
+    for (int i = 0; i < synth.getNumVoices(); ++i)
+    {
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
+        {
+            voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+        }
+    }
 }
 
 void Synth_00AudioProcessor::releaseResources()
@@ -159,9 +154,13 @@ void Synth_00AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // juce::dsp::AudioBlock<float> audioBlock{ buffer };
-    // osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    // gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    for (int i = 0; i < synth.getNumVoices(); ++i)
+    {
+        if (auto voices = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i)))
+        {
+
+        }
+    }
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
