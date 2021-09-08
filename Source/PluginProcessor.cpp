@@ -22,6 +22,8 @@ Synth_00AudioProcessor::Synth_00AudioProcessor()
                        )
 #endif
 {
+    synth.addSound(new SynthSound());
+    synth.addVoice(new SynthVoice());
 }
 
 Synth_00AudioProcessor::~Synth_00AudioProcessor()
@@ -96,16 +98,18 @@ void Synth_00AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlo
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 
-    juce::dsp::ProcessSpec spec;
-    spec.maximumBlockSize = samplesPerBlock;
-    spec.sampleRate = sampleRate;
-    spec.numChannels = getTotalNumOutputChannels();
+    // juce::dsp::ProcessSpec spec;
+    // spec.maximumBlockSize = samplesPerBlock;
+    // spec.sampleRate = sampleRate;
+    // spec.numChannels = getTotalNumOutputChannels();
 
-    osc.prepare(spec);
-    gain.prepare(spec);
+    // osc.prepare(spec);
+    // gain.prepare(spec);
 
-    osc.setFrequency(220.0f);
-    gain.setGainLinear(0.01f);
+    // osc.setFrequency(220.0f);
+    // gain.setGainLinear(0.01f);
+
+    synth.setCurrentPlaybackSampleRate(sampleRate);
 }
 
 void Synth_00AudioProcessor::releaseResources()
@@ -155,9 +159,11 @@ void Synth_00AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    juce::dsp::AudioBlock<float> audioBlock{ buffer };
-    osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
-    gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    // juce::dsp::AudioBlock<float> audioBlock{ buffer };
+    // osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+    // gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
 
 //==============================================================================
