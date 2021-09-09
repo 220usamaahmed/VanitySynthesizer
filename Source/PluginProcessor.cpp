@@ -19,7 +19,8 @@ Synth_00AudioProcessor::Synth_00AudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+    apvts(*this, nullptr, "PARAMTERS", createParameters())
 #endif
 {
     synth.addSound(new SynthSound());
@@ -156,9 +157,14 @@ void Synth_00AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
 
     for (int i = 0; i < synth.getNumVoices(); ++i)
     {
-        if (auto voices = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i)))
+        if (auto voices = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
 
+            voices->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 
@@ -195,4 +201,26 @@ void Synth_00AudioProcessor::setStateInformation (const void* data, int sizeInBy
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new Synth_00AudioProcessor();
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout Synth_00AudioProcessor::createParameters()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", 
+        juce::StringArray{ "Sin", "Saw", "Square"}, 0));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "ATTACK", "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.1f }, 0.1f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "DECAY", "Decay", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.1f }, 0.1f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "SUSTAIN", "Sustain", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.1f }, 1.0f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "RELEASE", "Release", juce::NormalisableRange<float> { 0.1f, 3.0f, 0.1f }, 0.4f));
+
+    return { params.begin(), params.end() };
 }
