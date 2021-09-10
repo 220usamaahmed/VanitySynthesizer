@@ -6,6 +6,17 @@
               pluginManufacturer="Colatz" companyName="Colatz">
   <MAINGROUP id="MOyw8J" name="Synth_00">
     <GROUP id="{ABA2016A-1DA4-DF97-5783-D0517638D08C}" name="Source">
+      <GROUP id="{53C36168-BD32-CDF6-2131-1E85826217D3}" name="Data">
+        <FILE id="NpQbl1" name="ADSRData.cpp" compile="1" resource="0" file="Source/ADSRData.cpp"/>
+        <FILE id="ANRU1q" name="ADSRData.h" compile="0" resource="0" file="Source/ADSRData.h"/>
+        <FILE id="t9GXSJ" name="OSCData.cpp" compile="1" resource="0" file="Source/OSCData.cpp"/>
+        <FILE id="Q5L4UQ" name="OSCData.h" compile="0" resource="0" file="Source/OSCData.h"/>
+      </GROUP>
+      <GROUP id="{6161B536-A7D9-C924-1DE9-A42D7A7B4562}" name="UI">
+        <FILE id="EqB7M2" name="ADSRComponent.cpp" compile="1" resource="0"
+              file="Source/ADSRComponent.cpp"/>
+        <FILE id="F5nN8P" name="ADSRComponent.h" compile="0" resource="0" file="Source/ADSRComponent.h"/>
+      </GROUP>
       <FILE id="xM287c" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="dIesW6" name="PluginProcessor.h" compile="0" resource="0"
