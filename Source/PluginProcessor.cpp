@@ -153,15 +153,19 @@ void Synth_00AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
     {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
+            auto& oscWave = *apvts.getRawParameterValue("OSC");
+            
             auto& attack = *apvts.getRawParameterValue("ATTACK");
             auto& decay = *apvts.getRawParameterValue("DECAY");
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
 
-            auto& oscWave = *apvts.getRawParameterValue("OSC");
+            auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
+            auto& fmFreq = *apvts.getRawParameterValue("FMFREQ");
 
-            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
             voice->getOscillator().setWaveType(oscWave);
+            voice->getOscillator().setFMParams(fmDepth, fmFreq);
+            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
 
@@ -204,9 +208,18 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth_00AudioProcessor::crea
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
+    // Wave type
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", 
         juce::StringArray{ "Sin", "Saw", "Square"}, 0));
 
+    // FM
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "FMFREQ", "FM Frequency", juce::NormalisableRange<float> { 0.0f, 1000.0f, 1.0f }, 5.0f));
+
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(
+        "FMDEPTH", "FM Depth", juce::NormalisableRange<float> { 0.0f, 100.0f, 1.0f }, 500.0f));
+
+    // ADSR
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
         "ATTACK", "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.1f }, 0.1f));
 

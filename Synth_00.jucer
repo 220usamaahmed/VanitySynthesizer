@@ -16,6 +16,9 @@
         <FILE id="EqB7M2" name="ADSRComponent.cpp" compile="1" resource="0"
               file="Source/ADSRComponent.cpp"/>
         <FILE id="F5nN8P" name="ADSRComponent.h" compile="0" resource="0" file="Source/ADSRComponent.h"/>
+        <FILE id="tXWyAJ" name="OSCComponent.cpp" compile="1" resource="0"
+              file="Source/OSCComponent.cpp"/>
+        <FILE id="xObJ9j" name="OSCComponent.h" compile="0" resource="0" file="Source/OSCComponent.h"/>
       </GROUP>
       <FILE id="xM287c" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
