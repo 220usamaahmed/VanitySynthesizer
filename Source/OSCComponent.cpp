@@ -17,8 +17,19 @@ OSCComponent::OSCComponent(juce::AudioProcessorValueTreeState& apvts)
     juce::StringArray choices{ "Sin", "Saw", "Square" };
     oscWaveSelector.addItemList(choices, 1);
     addAndMakeVisible(oscWaveSelector);
-
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "OSC", oscWaveSelector);
+
+
+    fmDepthSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    fmDepthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    fmFreqSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    fmFreqSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+
+    addAndMakeVisible(fmDepthSlider);
+    addAndMakeVisible(fmFreqSlider);
+
+    fmDepthSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FMDEPTH", fmDepthSlider);
+    fmFreqSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(apvts, "FMFREQ", fmFreqSlider);
 }
 
 OSCComponent::~OSCComponent()
@@ -43,4 +54,7 @@ void OSCComponent::resized()
     // components that your component contains..
 
     oscWaveSelector.setBounds(0, 0, 90, 20);
+
+    fmDepthSlider.setBounds(0, 50, 100, 100);
+    fmFreqSlider.setBounds(150, 50, 100, 100);
 }

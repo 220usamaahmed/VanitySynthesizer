@@ -15,7 +15,7 @@
 //==============================================================================
 /*
 */
-class OSCComponent  : public juce::Component
+class OSCComponent : public juce::Component
 {
 public:
     OSCComponent(juce::AudioProcessorValueTreeState& apvts);
@@ -27,6 +27,13 @@ public:
 private:
     juce::ComboBox oscWaveSelector;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
+
+    juce::Slider fmDepthSlider;
+    juce::Slider fmFreqSlider;
+
+    using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+    std::unique_ptr<SliderAttachment> fmDepthSliderAttachment;
+    std::unique_ptr<SliderAttachment> fmFreqSliderAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OSCComponent)
 };
