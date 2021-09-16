@@ -12,16 +12,16 @@
 #include "ADSRComponent.h"
 
 //==============================================================================
-ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts)
+ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::String attackID, juce::String decayID, juce::String sustainID, juce::String releaseID)
 {
     // In your constructor, you should add any child components, and
     // initialise any special settings that your component needs.
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-    attackAttachment = std::make_unique<SliderAttachment>(apvts, "ATTACK", attackSlider);
-    decayAttachment = std::make_unique<SliderAttachment>(apvts, "DECAY", decaySlider);
-    sustainAttachment = std::make_unique<SliderAttachment>(apvts, "SUSTAIN", sustainSlider);
-    releaseAttachment = std::make_unique<SliderAttachment>(apvts, "RELEASE", releaseSlider);
+    attackAttachment = std::make_unique<SliderAttachment>(apvts, attackID, attackSlider);
+    decayAttachment = std::make_unique<SliderAttachment>(apvts, decayID, decaySlider);
+    sustainAttachment = std::make_unique<SliderAttachment>(apvts, sustainID, sustainSlider);
+    releaseAttachment = std::make_unique<SliderAttachment>(apvts, releaseID, releaseSlider);
 
     setSliderParams(attackSlider);
     setSliderParams(decaySlider);

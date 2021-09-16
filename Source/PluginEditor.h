@@ -12,6 +12,7 @@
 #include "PluginProcessor.h"
 #include "ADSRComponent.h"
 #include "OSCComponent.h"
+#include "FilterComponent.h"
 
 //==============================================================================
 /**
@@ -32,8 +33,10 @@ private:
 
     Synth_00AudioProcessor& audioProcessor;
 
-    ADSRComponent adsr;
     OSCComponent osc;
+    ADSRComponent adsr;
+    FilterComponent filter;
+    ADSRComponent modADSR;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth_00AudioProcessorEditor)
 };
