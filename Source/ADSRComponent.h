@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "StyleSheet.h"
 
 //==============================================================================
 /*
@@ -25,6 +26,8 @@ public:
     void resized() override;
 
 private:
+    CustomLNF customLNF;
+
     juce::Slider attackSlider;
     juce::Slider decaySlider;
     juce::Slider sustainSlider;

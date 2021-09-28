@@ -14,8 +14,7 @@
 //==============================================================================
 ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::String attackID, juce::String decayID, juce::String sustainID, juce::String releaseID)
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(&customLNF);
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     attackAttachment = std::make_unique<SliderAttachment>(apvts, attackID, attackSlider);
@@ -27,16 +26,16 @@ ADSRComponent::ADSRComponent(juce::AudioProcessorValueTreeState& apvts, juce::St
     setSliderParams(decaySlider);
     setSliderParams(sustainSlider);
     setSliderParams(releaseSlider);
-
 }
 
 ADSRComponent::~ADSRComponent()
 {
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(nullptr);
 }
 
 void ADSRComponent::paint (juce::Graphics& g)
 {    
-    g.fillAll(juce::Colours::black);   // clear the background
+    g.fillAll(juce::Colours::transparentBlack);   // clear the background
 }
 
 void ADSRComponent::resized()
@@ -45,9 +44,9 @@ void ADSRComponent::resized()
     // components that your component contains..
 
     const auto bounds = getLocalBounds();
-    const auto sliderWidth = bounds.getWidth() / 4;
-    const auto sliderHeight = bounds.getHeight();
-    const auto sliderStartX = 0;
+    const auto sliderWidth = bounds.getWidth() / 6;
+    const auto sliderHeight = bounds.getWidth() / 6;
+    const auto sliderStartX = bounds.getWidth() / 3.0f;
     const auto sliderStartY = bounds.getHeight() / 2 - (sliderHeight / 2);
 
     attackSlider.setBounds(sliderStartX, sliderStartY, sliderWidth, sliderHeight);
@@ -58,7 +57,7 @@ void ADSRComponent::resized()
 
 void ADSRComponent::setSliderParams(juce::Slider& slider)
 {
-    slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
+    slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     addAndMakeVisible(slider);
 }

@@ -25,6 +25,12 @@
         <FILE id="tXWyAJ" name="OSCComponent.cpp" compile="1" resource="0"
               file="Source/OSCComponent.cpp"/>
         <FILE id="xObJ9j" name="OSCComponent.h" compile="0" resource="0" file="Source/OSCComponent.h"/>
+        <FILE id="HWPYDV" name="StyleSheet.cpp" compile="1" resource="0" file="Source/StyleSheet.cpp"/>
+        <FILE id="fhnjuk" name="StyleSheet.h" compile="0" resource="0" file="Source/StyleSheet.h"/>
+        <FILE id="gR52tw" name="WaveTypeSelector.cpp" compile="1" resource="0"
+              file="Source/WaveTypeSelector.cpp"/>
+        <FILE id="f8gZ04" name="WaveTypeSelector.h" compile="0" resource="0"
+              file="Source/WaveTypeSelector.h"/>
       </GROUP>
       <FILE id="xM287c" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
@@ -36,6 +42,10 @@
       <FILE id="gqAGNZ" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="G6KUmx" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="W75dHd" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
+    </GROUP>
+    <GROUP id="{D68ED044-7F29-C499-D3B0-6ED2B6747BDF}" name="Assets">
+      <FILE id="Qn2hiD" name="background-render.png" compile="0" resource="1"
+            file="Assets/background-render.png"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>

@@ -221,7 +221,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth_00AudioProcessor::crea
 
     // Wave type
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", 
-        juce::StringArray{ "Sin", "Saw", "Square"}, 0));
+        juce::StringArray{ "Sin", "Saw", "Square", "Triangle" }, 0));
 
     // FM
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
@@ -248,7 +248,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth_00AudioProcessor::crea
         juce::StringArray{ "Lowpass", "Bandpass", "Highpass" }, 0));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
-        "FILTERCUTOFF", "Filter Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.1f, 0.6f }, 20.0f));
+        "FILTERCUTOFF", "Filter Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.1f, 0.6f }, 20000.0f));
     
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
         "FILTERRES", "Filter Resonance", juce::NormalisableRange<float> { 1.0f, 10.0f, 0.1f }, 1.0f));

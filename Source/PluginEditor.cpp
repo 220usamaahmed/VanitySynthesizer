@@ -15,16 +15,22 @@ Synth_00AudioProcessorEditor::Synth_00AudioProcessorEditor (Synth_00AudioProcess
     adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
     osc(audioProcessor.apvts),
     filter(audioProcessor.apvts),
-    modADSR(audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
+    modADSR(audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE"),
+    waveTypeSelector(audioProcessor.apvts)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (800, 600);
+    setSize (648, 648);
 
-    addAndMakeVisible(adsr);
+    backgroundImage.setImage(juce::ImageCache::getFromMemory(BinaryData::backgroundrender_png, BinaryData::backgroundrender_pngSize));
+
+    addAndMakeVisible(backgroundImage);
+
     addAndMakeVisible(osc);
+    addAndMakeVisible(adsr);
     addAndMakeVisible(filter);
+    
     addAndMakeVisible(modADSR);
+
+    // addAndMakeVisible(waveTypeSelector);
 }
 
 Synth_00AudioProcessorEditor::~Synth_00AudioProcessorEditor()
@@ -40,8 +46,41 @@ void Synth_00AudioProcessorEditor::paint (juce::Graphics& g)
 
 void Synth_00AudioProcessorEditor::resized()
 {
-    adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight() / 2);
-    osc.setBounds(0, 0, getWidth() / 2, getHeight() / 2);
-    filter.setBounds(0, getHeight() / 2, getWidth() / 2, getHeight() / 2);
-    modADSR.setBounds(getWidth() / 2, getHeight() / 2, getWidth() / 2, getHeight() / 2);
+    backgroundImage.setBounds(0, 0, getWidth(), getHeight());
+
+    juce::Rectangle<int> bounds = getBounds();
+    bounds.removeFromTop(50);
+    bounds.removeFromLeft(56);
+    bounds.removeFromBottom(51);
+    bounds.removeFromRight(51);
+
+    osc.setBounds(
+        bounds.getX(),
+        bounds.getTopLeft().getY() + 31,
+        bounds.getWidth(), 
+        bounds.getHeight() * (1.0f / 3.0f)
+    );
+
+    adsr.setBounds(
+        bounds.getX(),
+        bounds.getTopLeft().getY() + 217,
+        bounds.getWidth(), 
+        bounds.getHeight() * (4.0f / 18.0f)
+    );
+    
+    filter.setBounds(
+        bounds.getX(),
+        bounds.getTopLeft().getY() + 351,
+        bounds.getWidth(),
+        bounds.getHeight() * (4.0f / 18.0f)
+    );
+    
+    modADSR.setBounds(
+        bounds.getX(),
+        bounds.getTopLeft().getY() + 395,
+        bounds.getWidth(),
+        bounds.getHeight() * (1.0f / 3.0f)
+    );
+
+    // waveTypeSelector.setBounds(0, 0, 200, 200);
 }

@@ -14,16 +14,17 @@
 //==============================================================================
 OSCComponent::OSCComponent(juce::AudioProcessorValueTreeState& apvts)
 {
-    juce::StringArray choices{ "Sin", "Saw", "Square" };
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(&customLNF);
+
+    juce::StringArray choices{ "Sin", "Saw", "Square", "Triangle" };
     oscWaveSelector.addItemList(choices, 1);
-    addAndMakeVisible(oscWaveSelector);
+    // addAndMakeVisible(oscWaveSelector);
     oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "OSC", oscWaveSelector);
 
-
     fmDepthSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    fmDepthSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    fmDepthSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     fmFreqSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    fmFreqSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    fmFreqSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
 
     addAndMakeVisible(fmDepthSlider);
     addAndMakeVisible(fmFreqSlider);
@@ -34,18 +35,12 @@ OSCComponent::OSCComponent(juce::AudioProcessorValueTreeState& apvts)
 
 OSCComponent::~OSCComponent()
 {
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(nullptr);
 }
 
 void OSCComponent::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (juce::Colours::black);   // clear the background
+    g.fillAll (juce::Colours::transparentBlack);
 }
 
 void OSCComponent::resized()
@@ -55,6 +50,8 @@ void OSCComponent::resized()
 
     oscWaveSelector.setBounds(0, 0, 90, 20);
 
-    fmDepthSlider.setBounds(0, 50, 100, 100);
-    fmFreqSlider.setBounds(150, 50, 100, 100);
+    auto const oneThird = getWidth() / 3.0f;
+
+    fmDepthSlider.setBounds(oneThird, 0, oneThird, oneThird);
+    fmFreqSlider.setBounds(oneThird * 2, 0, oneThird, oneThird);
 }

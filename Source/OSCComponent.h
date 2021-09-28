@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "StyleSheet.h"
 
 //==============================================================================
 /*
@@ -25,11 +26,13 @@ public:
     void resized() override;
 
 private:
+    CustomLNF customLNF;
+
     juce::ComboBox oscWaveSelector;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
 
-    juce::Slider fmDepthSlider;
-    juce::Slider fmFreqSlider;
+    juce::Slider fmDepthSlider{ "FM DEPTH" };
+    juce::Slider fmFreqSlider{ " FM FREQ "};
 
     using SliderAttachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     std::unique_ptr<SliderAttachment> fmDepthSliderAttachment;

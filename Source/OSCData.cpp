@@ -32,6 +32,9 @@ void OSCData::setWaveType(const int choice)
         // Square wave
         initialise([](float x) { return x < 0.0f ? -1.0f : 1.0f; });
         break;
+    case 3:
+        initialise([](float x) { return (2 / juce::MathConstants<float>::pi)* std::asin(std::sin(x)); });
+        break;
     default:
         jassertfalse;
         break;
