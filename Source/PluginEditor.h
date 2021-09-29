@@ -41,7 +41,5 @@ private:
     FilterComponent filter;
     ADSRComponent modADSR;
 
-    WaveTypeSelector waveTypeSelector;
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth_00AudioProcessorEditor)
 };

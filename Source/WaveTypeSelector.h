@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "StyleSheet.h"
 
 //==============================================================================
 /*
@@ -30,9 +31,11 @@ public:
     };
 
 private:
+    CustomLNF customLNF;
+
     juce::ToggleButton sinButton{ "Sin" };
-    juce::ToggleButton squareButton{ "Square" };
     juce::ToggleButton sawButton{ "Saw" };
+    juce::ToggleButton squareButton{ "Square" };
     juce::ToggleButton triangleButton{ "Triangle" };
 
     void updateToggleState(juce::Button* button, juce::String name);

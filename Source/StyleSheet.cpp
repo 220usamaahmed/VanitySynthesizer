@@ -10,7 +10,6 @@
 
 #include "StyleSheet.h"
 
-
 void CustomLNF::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height, float sliderPos, float rotaryStartAngle, float rotaryEndAngle, juce::Slider& slider)
 {
     auto outline = juce::Colour::Colour(24, 24, 24);
@@ -60,13 +59,27 @@ void CustomLNF::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int
             4, 4);
     }
 
+    g.setFont(10);
     auto value = juce::String(slider.getValue());
     auto strWidth = g.getCurrentFont().getStringWidth(value);
     juce::Rectangle<float> r;
-    r.setTop(y);
+    r.setTop(y + 8);
     r.setBottom(y + 24);
     r.setLeft(x);
     r.setRight(x + width);
-    g.setColour(juce::Colours::white);
+    g.setColour(juce::Colour(240, 240, 240));
     g.drawFittedText(value, r.toNearestInt(), juce::Justification::centred, 1);
+}
+
+void CustomLNF::drawToggleButton(juce::Graphics& g, juce::ToggleButton& toggleButton, bool shouldDrawButtonAsHighlighted, bool shouldDrawButtonAsDown)
+{
+    juce::Rectangle<float> bounds(
+        4, 4, toggleButton.getWidth() - 8, toggleButton.getWidth() - 8
+    );
+
+    if (toggleButton.getToggleState())
+    {
+        g.setColour(juce::Colour(255, 73, 99));
+        g.drawRoundedRectangle(bounds, 8, 4);
+    }
 }

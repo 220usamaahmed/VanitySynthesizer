@@ -15,6 +15,8 @@
 WaveTypeSelector::WaveTypeSelector(juce::AudioProcessorValueTreeState& apvts) :
     waveTypeSelectorAttachment(*apvts.getParameter("OSC"), parameterChangedCallback)
 {
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(&customLNF);
+
     sinButton.setRadioGroupId(WaveButtons);
     sawButton.setRadioGroupId(WaveButtons);
     squareButton.setRadioGroupId(WaveButtons);
@@ -35,11 +37,12 @@ WaveTypeSelector::WaveTypeSelector(juce::AudioProcessorValueTreeState& apvts) :
 
 WaveTypeSelector::~WaveTypeSelector()
 {
+    juce::LookAndFeel_V4::setDefaultLookAndFeel(nullptr);
 }
 
 void WaveTypeSelector::paint (juce::Graphics& g)
 {
-    g.fillAll (juce::Colours::black);
+    g.fillAll (juce::Colours::transparentBlack);
 }
 
 void WaveTypeSelector::resized()
@@ -66,5 +69,5 @@ void WaveTypeSelector::updateToggleState(juce::Button* button, juce::String name
 
 void WaveTypeSelector::parameterChangedCallback(float newValue)
 {
-
+    // TODO: Update UI here
 }

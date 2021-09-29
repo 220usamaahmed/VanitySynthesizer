@@ -15,8 +15,7 @@ Synth_00AudioProcessorEditor::Synth_00AudioProcessorEditor (Synth_00AudioProcess
     adsr(audioProcessor.apvts, "ATTACK", "DECAY", "SUSTAIN", "RELEASE"),
     osc(audioProcessor.apvts),
     filter(audioProcessor.apvts),
-    modADSR(audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE"),
-    waveTypeSelector(audioProcessor.apvts)
+    modADSR(audioProcessor.apvts, "MODATTACK", "MODDECAY", "MODSUSTAIN", "MODRELEASE")
 {
     setSize (648, 648);
 
@@ -29,8 +28,6 @@ Synth_00AudioProcessorEditor::Synth_00AudioProcessorEditor (Synth_00AudioProcess
     addAndMakeVisible(filter);
     
     addAndMakeVisible(modADSR);
-
-    // addAndMakeVisible(waveTypeSelector);
 }
 
 Synth_00AudioProcessorEditor::~Synth_00AudioProcessorEditor()
@@ -77,10 +74,8 @@ void Synth_00AudioProcessorEditor::resized()
     
     modADSR.setBounds(
         bounds.getX(),
-        bounds.getTopLeft().getY() + 395,
+        bounds.getTopLeft().getY() + 426,
         bounds.getWidth(),
-        bounds.getHeight() * (1.0f / 3.0f)
+        bounds.getHeight() * (4.0f / 18.0f)
     );
-
-    // waveTypeSelector.setBounds(0, 0, 200, 200);
 }

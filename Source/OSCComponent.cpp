@@ -12,14 +12,12 @@
 #include "OSCComponent.h"
 
 //==============================================================================
-OSCComponent::OSCComponent(juce::AudioProcessorValueTreeState& apvts)
+OSCComponent::OSCComponent(juce::AudioProcessorValueTreeState& apvts) :
+    oscWaveSelector(apvts)
 {
     juce::LookAndFeel_V4::setDefaultLookAndFeel(&customLNF);
 
-    juce::StringArray choices{ "Sin", "Saw", "Square", "Triangle" };
-    oscWaveSelector.addItemList(choices, 1);
-    // addAndMakeVisible(oscWaveSelector);
-    oscWaveSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "OSC", oscWaveSelector);
+    addAndMakeVisible(oscWaveSelector);
 
     fmDepthSlider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     fmDepthSlider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
@@ -45,13 +43,9 @@ void OSCComponent::paint (juce::Graphics& g)
 
 void OSCComponent::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
-
-    oscWaveSelector.setBounds(0, 0, 90, 20);
-
     auto const oneThird = getWidth() / 3.0f;
 
+    oscWaveSelector.setBounds(0, 0, oneThird, oneThird);
     fmDepthSlider.setBounds(oneThird, 0, oneThird, oneThird);
     fmFreqSlider.setBounds(oneThird * 2, 0, oneThird, oneThird);
 }

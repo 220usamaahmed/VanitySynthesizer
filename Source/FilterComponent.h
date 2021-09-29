@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "FilterTypeSelector.h"
 #include "StyleSheet.h"
 
 //==============================================================================
@@ -28,8 +29,7 @@ public:
 private:
     CustomLNF customLNF;
 
-    juce::ComboBox filterTypeSelector;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> filterTypeSelectorAttachment;
+    FilterTypeSelector filterTypeSelector;
 
     juce::Slider filterFreqSlider;
     juce::Slider filterResSlider;

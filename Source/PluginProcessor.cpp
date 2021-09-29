@@ -245,7 +245,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth_00AudioProcessor::crea
 
     // Filter
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "Filter Type",
-        juce::StringArray{ "Lowpass", "Bandpass", "Highpass" }, 0));
+        juce::StringArray{ "None", "Lowpass", "Bandpass", "Highpass" }, 0));
 
     params.push_back(std::make_unique<juce::AudioParameterFloat>(
         "FILTERCUTOFF", "Filter Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.1f, 0.6f }, 20000.0f));

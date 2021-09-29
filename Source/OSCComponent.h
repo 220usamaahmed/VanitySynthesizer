@@ -11,6 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "WaveTypeSelector.h"
 #include "StyleSheet.h"
 
 //==============================================================================
@@ -28,8 +29,7 @@ public:
 private:
     CustomLNF customLNF;
 
-    juce::ComboBox oscWaveSelector;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveSelectorAttachment;
+    WaveTypeSelector oscWaveSelector;
 
     juce::Slider fmDepthSlider{ "FM DEPTH" };
     juce::Slider fmFreqSlider{ " FM FREQ "};

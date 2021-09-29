@@ -26,5 +26,7 @@ public:
 private:
     juce::dsp::StateVariableTPTFilter<float> filter;
 
+    bool filterBypass{ true };
+
     bool isPrepared{ false };
 };

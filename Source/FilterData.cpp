@@ -28,21 +28,28 @@ void FilterData::process(juce::AudioBuffer<float>& buffer)
 {
     jassert(isPrepared);
 
-    juce::dsp::AudioBlock<float> block{ buffer };
-    filter.process(juce::dsp::ProcessContextReplacing<float>{ block });
+    if (!filterBypass)
+    {
+        juce::dsp::AudioBlock<float> block{ buffer };
+        filter.process(juce::dsp::ProcessContextReplacing<float>{ block });
+    }
 }
 
 void FilterData::updateParameters(const int filterType, const float freq, const float resonance, const float modulator)
 {
+    filterBypass = false;
+
     switch (filterType)
     {
     case 0:
+        filterBypass = true;
+    case 1:
         filter.setType(juce::dsp::StateVariableTPTFilterType::lowpass);
         break;
-    case 1:
+    case 2:
         filter.setType(juce::dsp::StateVariableTPTFilterType::bandpass);
         break;
-    case 2:
+    case 3:
         filter.setType(juce::dsp::StateVariableTPTFilterType::highpass);
         break;
     }
