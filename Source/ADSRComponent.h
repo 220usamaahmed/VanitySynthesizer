@@ -39,6 +39,7 @@ private:
     std::unique_ptr<SliderAttachment> sustainAttachment;
     std::unique_ptr<SliderAttachment> releaseAttachment;
 
+    // void updateGraph(juce::Slider&, juce::String name);
     void setSliderParams(juce::Slider& slider);
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ADSRComponent)
