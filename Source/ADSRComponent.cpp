@@ -112,8 +112,3 @@ void ADSRComponent::setSliderParams(juce::Slider& slider)
     slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     addAndMakeVisible(slider);
 }
-
-//void updateGraph(juce::Slider&, juce::String name)
-//{
-//    
-//}
